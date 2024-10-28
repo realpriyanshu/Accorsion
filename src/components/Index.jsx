@@ -17,13 +17,12 @@ export default function Index() {
         const copyArr = [...multiple];
         
         const findIndexOfCurrentId = copyArr.indexOf(currentId);
-        if(findIndexOfCurrentId === -1) {copyArr.push(currentId)}
-        else{ copyArr.slice(currentId,1) ;
-            setMultiple(copyArr)
-        }
-        
-        
-        
+ console.log(findIndexOfCurrentId);
+
+        if(findIndexOfCurrentId === -1) copyArr.push(currentId)
+        else{ copyArr.splice(findIndexOfCurrentId,1) ;
+}
+setMultiple(copyArr)
         
     }
     console.log(enableMultiSelected,selected,multiple)
@@ -39,7 +38,13 @@ export default function Index() {
                             <h3>{d.question}</h3>
                         <span>+</span>
                         </div>
-                        {selected=== d.id? <div className="content">
+                        { enableMultiSelected ? multiple.indexOf(d.id) !== -1 && (
+                            <div className="content">
+                            <h5>{d.answer}</h5>
+                        </div>
+                        ):
+                        
+                        selected=== d.id? <div className="content">
                             <h5>{d.answer}</h5>
                         </div>: null}
                     </div>
